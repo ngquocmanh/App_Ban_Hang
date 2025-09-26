@@ -1,6 +1,6 @@
 
-import 'package:app_01/DangKy.dart';
-import 'package:app_01/QuenMatKhau.dart';
+import 'package:app_01/Authenticatin/DangKy.dart';
+import 'package:app_01/Setting/QuenMatKhau.dart';
 import 'package:app_01/Home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

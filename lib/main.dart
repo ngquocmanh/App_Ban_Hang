@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'CardProvider.dart';
-import 'ReviewProvider.dart';
-import 'DangNhap.dart';
-import 'GiaoDien.dart';
-import 'Thanhtoan.dart';
-import 'TrangChu.dart';
-import 'HistoryProvider.dart';
+import 'Provider/CardProvider.dart';
+import 'Provider/ReviewProvider.dart';
+import 'Authenticatin/DangNhap.dart';
+import 'Authenticatin/GiaoDien.dart';
+import 'Pay/Thanhtoan.dart';
+import 'Home_page/TrangChu.dart';
+import 'Provider/HistoryProvider.dart';
 void main() {
   runApp(
     MultiProvider(

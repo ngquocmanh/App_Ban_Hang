@@ -1,10 +1,10 @@
 
-import 'package:app_01/Review.dart';
+import 'package:app_01/Review/Review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-import 'ReviewProvider.dart';
-import 'Sanpham.dart';
+import '../Provider/ReviewProvider.dart';
+import '../product/Sanpham.dart';
 
 class ReviewPage extends StatefulWidget {
   final String productName;

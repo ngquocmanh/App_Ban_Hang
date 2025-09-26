@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'Review.dart';
+import '../Review/Review.dart';
 
 class ReviewProvider with ChangeNotifier {
   final List<Review> _reviews = [];

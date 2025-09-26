@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Sanpham.dart';
-import 'CardProvider.dart';
-import 'Review.dart';
-import 'ReviewProvider.dart';
+import '../Provider/CardProvider.dart';
+import '../Review/Review.dart';
+import '../Provider/ReviewProvider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Chitietsanpham extends StatefulWidget {

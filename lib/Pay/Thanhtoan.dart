@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'CardProvider.dart';
+import '../Provider/CardProvider.dart';
 import 'package:intl/intl.dart';
-import 'HistoryProvider.dart';
+import '../Provider/HistoryProvider.dart';
 class Pay2 extends StatelessWidget {
   const Pay2({super.key});
 

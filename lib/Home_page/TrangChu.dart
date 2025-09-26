@@ -1,15 +1,15 @@
-import 'package:app_01/CardProvider.dart';
-import 'package:app_01/ChiTietSanPham.dart';
-import 'package:app_01/DatBan.dart';
-import 'package:app_01/LichSu.dart';
+import 'package:app_01/Provider/CardProvider.dart';
+import 'package:app_01/product/ChiTietSanPham.dart';
+import 'package:app_01/Home_page/DatBan.dart';
+import 'package:app_01/Home_page/LichSu.dart';
 import 'package:app_01/Location.dart';
-import 'package:app_01/Setting.dart';
+import 'package:app_01/Home_page/Setting.dart';
 import 'package:flutter/material.dart';
-import 'package:app_01/Sanpham.dart';
-import 'package:app_01/Thanhtoan.dart';
+import 'package:app_01/product/Sanpham.dart';
+import 'package:app_01/Pay/Thanhtoan.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import 'product.dart';
+import '../product/product.dart';
 class Shop2 extends StatefulWidget {
   const Shop2({super.key});
 

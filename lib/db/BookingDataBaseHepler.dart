@@ -80,9 +80,9 @@ class BookingDataBaseHelper {
     return await db.query('booking');
   }
 
-  Future<int> createBooking(Booking booking) async{
-    final db = await instance.database;
-    return await db.insert('booking', booking.toMap());
-  }
+  // Future<int> createBooking(Booking booking) async{
+  //   final db = await instance.database;
+  //   return await db.insert('booking', booking.toMap());
+  // }
 
 }

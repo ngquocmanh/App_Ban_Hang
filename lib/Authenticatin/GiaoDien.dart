@@ -1,7 +1,7 @@
-import 'package:app_01/DangKy.dart';
-import 'package:app_01/DangNhap.dart';
+import 'package:app_01/Authenticatin/DangKy.dart';
+import 'package:app_01/Authenticatin/DangNhap.dart';
 import 'package:flutter/material.dart';
-import 'package:app_01/TrangChu.dart';
+import 'package:app_01/Home_page/TrangChu.dart';
 class Giaodien extends StatefulWidget {
   const Giaodien({super.key});
 

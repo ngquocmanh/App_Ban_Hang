@@ -1,11 +1,11 @@
-import 'package:app_01/LichSu.dart';
+import 'package:app_01/Home_page/LichSu.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'Setting.dart';
 import 'TrangChu.dart';
-import 'db/BookingDataBaseHepler.dart';
-import 'book_table.dart';
+import '../db/BookingDataBaseHepler.dart';
+import '../db/book_table.dart';
 
 class Product {
   final List<String> anhs;

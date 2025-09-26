@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Sanpham.dart';
+import '../product/Sanpham.dart';
 
 class HistoryProvider with ChangeNotifier {
   final List<Product2> _history = [];

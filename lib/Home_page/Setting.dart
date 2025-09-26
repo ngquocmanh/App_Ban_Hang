@@ -1,7 +1,7 @@
-import 'package:app_01/GiaoDien.dart';
-import 'package:app_01/Trogiup.dart';
-import 'package:app_01/DatBan.dart';
-import 'package:app_01/Person.dart';
+import 'package:app_01/Authenticatin/GiaoDien.dart';
+import 'package:app_01/Setting/Trogiup.dart';
+import 'package:app_01/Home_page/DatBan.dart';
+import 'package:app_01/Setting/Person.dart';
 import 'package:flutter/material.dart';
 import 'TrangChu.dart';
 import 'LichSu.dart';

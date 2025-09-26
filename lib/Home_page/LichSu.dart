@@ -1,10 +1,10 @@
-import 'package:app_01/DatBan.dart';
+import 'package:app_01/Home_page/DatBan.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'HistoryProvider.dart';
+import '../Provider/HistoryProvider.dart';
 import 'TrangChu.dart';
 import 'Setting.dart';
-import 'CardProvider.dart';
+import '../Provider/CardProvider.dart';
 class Lichsu extends StatefulWidget {
   const Lichsu({super.key});
 
