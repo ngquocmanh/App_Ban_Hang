@@ -1,4 +1,5 @@
 import 'package:app_01/Home_page/LichSu.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -51,18 +52,18 @@ class _PromoPageState extends State<PromoPage> {
     }
   }
 
-  @override
-  void dispose() {
-    for (final controller in _controllers.values) {
-      controller.dispose();
-    }
-    _tableController.dispose();
-    _nameController.dispose();
-    _phoneController.dispose();
-    _dateController.dispose();
-    _timeController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   for (final controller in _controllers.values) {
+  //     controller.dispose();
+  //   }
+  //   _tableController.dispose();
+  //   _nameController.dispose();
+  //   _phoneController.dispose();
+  //   _dateController.dispose();
+  //   _timeController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,12 @@ class _PromoPageState extends State<PromoPage> {
           "Đặt bàn",
           style: TextStyle(color: Colors.white),
         ),
+        actions: [
+          IconButton(onPressed: (){
+          //  Navigator.push(context, MaterialPageRoute(builder: (context) => LichSuDatBan()));
+          },
+              icon: Icon(Icons.history_outlined,color: Colors.white,))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

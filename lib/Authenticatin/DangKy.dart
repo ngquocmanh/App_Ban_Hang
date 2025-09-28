@@ -1,6 +1,8 @@
+import 'package:app_01/Authenticatin/DangNhap.dart';
+import 'package:app_01/db/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:app_01/db/UserDatabaseHelper.dart';
 class Dangky extends StatefulWidget {
   const Dangky({super.key});
 
@@ -11,9 +13,48 @@ class Dangky extends StatefulWidget {
 class _DangkyState extends State<Dangky> {
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
+  bool _obscureConfirmText = true;
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _confirmpassController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
   bool _isAgreey = false;
+
+  Future<void> _register() async {
+    if (_formKey.currentState!.validate()) {
+      final user = User(
+          name: _nameController.text,
+          email:_emailController.text,
+          phone: _phoneController.text,
+          password: _passController.text
+      );
+
+      await UserDatabaseHelper.instance.regesterUser(user);
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Đăng ký thành công',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 2),
+        ),
+      );
+
+      await Future.delayed(const Duration(seconds: 2));
+      if (!mounted) return;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Dangnhap()),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +78,7 @@ class _DangkyState extends State<Dangky> {
                 const SizedBox(height: 40),
 
                 TextFormField(
+                  controller: _nameController,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     labelText: 'Họ tên',
@@ -55,6 +97,7 @@ class _DangkyState extends State<Dangky> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  controller: _phoneController,
                   style: const TextStyle(color: Colors.white),
                   keyboardType: TextInputType.phone,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -113,19 +156,21 @@ class _DangkyState extends State<Dangky> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(style: const TextStyle(color: Colors.white),
+                  obscureText: _obscureConfirmText,
                   controller: _confirmpassController,
                   decoration: InputDecoration(
                     labelText: 'Nhập lại mật khẩu',
                     hintText: 'Nhập lại mật khẩu',
-                    prefixIcon: IconButton(
+                    prefixIcon: Icon(Icons.lock),
+                    suffixIcon: IconButton(
                       onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
+                  setState(() {
+                  _obscureConfirmText = !_obscureConfirmText;
+                  });
+                  },
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                  ),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -164,17 +209,7 @@ class _DangkyState extends State<Dangky> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Đăng ký thành công!"),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-                      Navigator.pop(context);
-                    }
-                  },
+                  onPressed: _register,
                   child: const Text(
                     "Đăng ký",
                     style: TextStyle(fontSize: 18, color: Colors.white),

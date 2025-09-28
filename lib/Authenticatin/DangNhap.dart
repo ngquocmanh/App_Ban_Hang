@@ -1,10 +1,9 @@
 
 import 'package:app_01/Authenticatin/DangKy.dart';
 import 'package:app_01/Setting/QuenMatKhau.dart';
-import 'package:app_01/Home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:app_01/db/UserDatabaseHelper.dart';
 class Dangnhap extends StatefulWidget {
   const Dangnhap({super.key});
 
@@ -25,7 +24,19 @@ class _DangnhapState extends State<Dangnhap> {
     _passController.dispose();
     super.dispose();
   }
-
+  Future<void> _loginUser() async{
+    if(_formKey.currentState!.validate()){
+      final user = await UserDatabaseHelper.instance.loginUser(_phoneController.text, _passController.text);
+      if (!mounted) return;
+      if(user != null){
+        Navigator.pushReplacementNamed(context, '/shop');
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Sai tài khản mật khẩu',style: TextStyle(color: Colors.red),))
+        );
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,15 +74,15 @@ class _DangnhapState extends State<Dangnhap> {
                       borderSide: BorderSide(color: Colors.white ,width: 2),
                     ),
                   ),
-                //  validator: (value) {
-                //    if (value == null || value.isEmpty) {
-                //      return 'Vui lòng nhập số điện thoại';
-                //    }
-                //    if (value.length < 9 || value.length > 11) {
-                //      return 'Số điện thoại không hợp lệ';
-                //    }
-                //    return null;
-                //  },
+                 validator: (value) {
+                   if (value == null || value.isEmpty) {
+                     return 'Vui lòng nhập số điện thoại';
+                   }
+                   if (value.length < 9 || value.length > 11) {
+                     return 'Số điện thoại không hợp lệ';
+                   }
+                   return null;
+                 },
                 ),
 
                 const SizedBox(height: 20),
@@ -96,15 +107,15 @@ class _DangnhapState extends State<Dangnhap> {
                       borderRadius: BorderRadius.circular(18),
                     ),
                   ),
-               //   validator: (value) {
-               //     if (value == null || value.isEmpty) {
-               //       return 'Vui lòng nhập mật khẩu';
-               //     }
-               //     if (value.length < 6) {
-                //      return 'Mật khẩu tối thiểu 6 ký tự';
-                //    }
-                //    return null;
-                //  },
+                 validator: (value) {
+                   if (value == null || value.isEmpty) {
+                     return 'Vui lòng nhập mật khẩu';
+                   }
+                   if (value.length < 6) {
+                     return 'Mật khẩu tối thiểu 6 ký tự';
+                   }
+                   return null;
+                 },
                 ),
                 SizedBox(height: 15,),
                 Row(
@@ -130,11 +141,7 @@ class _DangnhapState extends State<Dangnhap> {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      Navigator.pushReplacementNamed(context, '/shop');
-                    }
-                  },
+                  onPressed: _loginUser,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     padding: const EdgeInsets.symmetric(vertical: 14),
