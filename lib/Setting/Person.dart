@@ -1,6 +1,5 @@
-import 'package:app_01/db/UserDatabaseHelper.dart';
 import 'package:flutter/material.dart';
-import 'package:app_01/db/User.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Person extends StatefulWidget {
   final String phone;
@@ -11,18 +10,18 @@ class Person extends StatefulWidget {
 }
 
 class _PersonState extends State<Person> {
-  String selectedCity = "Hà Nội";
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _introduceController =TextEditingController();
 
-  // Input style sáng
+  String selectedCity = 'Hà Nội';
   InputDecoration lightInput(String label) {
     return InputDecoration(
       labelText: label,
       labelStyle: const TextStyle(color: Colors.black87),
       filled: true,
-      fillColor: Colors.white, // nền trắng
+      fillColor: Colors.white,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: const BorderSide(color: Colors.grey),
@@ -33,32 +32,45 @@ class _PersonState extends State<Person> {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Colors.blue), // viền xanh khi focus
+        borderSide: const BorderSide(color: Colors.blue),
       ),
     );
   }
-
   @override
   void initState() {
     super.initState();
-    loadData();
+    _loadProfile();
   }
-
-  Future<void> loadData() async {
-    final user = await UserDatabaseHelper.instance.getUser(widget.phone);
-    if (user != null) {
-      setState(() {
-        _nameController.text = user.name;
-        _emailController.text = user.email;
-        _phoneController.text = user.phone;
-      });
-    }
+  Future<void> _loadProfile() async{
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _nameController.text = prefs.getString('name') ?? '';
+      _emailController.text = prefs.getString('email') ?? '';
+      _phoneController.text = prefs.getString('phone') ?? '';
+      _introduceController.text = prefs.getString('introduce') ?? '';
+      selectedCity = prefs.getString('city') ?? 'Hà Nội';
+    });
   }
-
+  Future<void> _saveProfile() async{
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('name', _nameController.text);
+    await prefs.setString('email', _emailController.text);
+    await prefs.setString('phone', _phoneController.text);
+    await prefs.setString('introduce', _introduceController.text);
+    await prefs.setString('city', selectedCity);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Lưu thông tin thành công'),
+      backgroundColor: Colors.green,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[50], // nền xanh nhạt
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
         title: const Text(
           'Trang Cá Nhân',
@@ -106,6 +118,7 @@ class _PersonState extends State<Person> {
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
+                  controller: _introduceController,
                   style: const TextStyle(color: Colors.black),
                   decoration: lightInput("Giới thiệu bản thân"),
                   maxLines: 3,
@@ -113,17 +126,45 @@ class _PersonState extends State<Person> {
                 const SizedBox(height: 10),
                 DropdownButtonFormField<String>(
                   value: selectedCity,
-                  decoration: lightInput("Thành Phố"),
+                  decoration: lightInput("Tỉnh / Thành phố"),
                   dropdownColor: Colors.white,
                   style: const TextStyle(color: Colors.black),
                   iconEnabledColor: Colors.black54,
                   items: [
                     'Hà Nội',
-                    'Hà Tĩnh',
-                    'Đà Nẵng',
-                    'TP HCM',
                     'Hải Phòng',
-                    'Cần Thơ'
+                    'Quảng Ninh',
+                    'Lạng Sơn',
+                    'Thái Nguyên',
+                    'Bắc Giang',
+                    'Lào Cai',
+                    'Điện Biên',
+                    'Hà Giang',
+                    'Thanh Hóa',
+                    'Nghệ An',
+                    'Ninh Bình',
+                    'Thái Bình',
+                    'Hòa Bình',
+                    'Vĩnh Phúc',
+                    'Bắc Ninh',
+                    'Quảng Bình',
+                    'Thừa Thiên Huế',
+                    'Đà Nẵng',
+                    'Quảng Ngãi',
+                    'Bình Định',
+                    'Phú Yên',
+                    'Khánh Hòa',
+                    'Ninh Thuận',
+                    'Bình Thuận',
+                    'Đắk Lắk',
+                    'Gia Lai',
+                    'Lâm Đồng',
+                    'TP Hồ Chí Minh',
+                    'Đồng Nai',
+                    'Long An',
+                    'Cần Thơ',
+                    'An Giang',
+                    'Hà Tĩnh',
                   ].map((city) {
                     return DropdownMenuItem(
                       value: city,
@@ -136,28 +177,19 @@ class _PersonState extends State<Person> {
                     });
                   },
                 ),
+
                 const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed:(){
-                    loadData();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Lưu thông tin thành công'),
-                        backgroundColor: Colors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      )
-                    );
-                  },
+                  onPressed: _saveProfile,
                   child: const Text(
                     'Lưu thông tin',
                     style: TextStyle(

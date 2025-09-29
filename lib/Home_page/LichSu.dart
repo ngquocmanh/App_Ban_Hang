@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../Provider/HistoryProvider.dart';
 import 'TrangChu.dart';
 import 'Setting.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Provider/CardProvider.dart';
 class Lichsu extends StatefulWidget {
   const Lichsu({super.key});
@@ -12,9 +13,21 @@ class Lichsu extends StatefulWidget {
   State<Lichsu> createState() => _LichsuState();
 }
 
+
 class _LichsuState extends State<Lichsu> {
   int _selectedIndex = 3;
+  @override @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadProduct();
+  }
+  Future<void> _loadProduct() async{
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
 
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final historyProvider = Provider.of<HistoryProvider>(context);
