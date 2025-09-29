@@ -36,13 +36,16 @@ class _DangkyState extends State<Dangky> {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+         SnackBar(
           content: Text(
             'Đăng ký thành công',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 2),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            )
         ),
       );
 

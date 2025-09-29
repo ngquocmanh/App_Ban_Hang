@@ -82,7 +82,7 @@ class _SettingState extends State<Setting> {
                       style: TextStyle(color: Colors.white)),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Person()));
+                        MaterialPageRoute(builder: (context) => const Person(phone: '',)));
                   },
                 ),
                 ListTile(

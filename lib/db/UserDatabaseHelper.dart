@@ -36,10 +36,12 @@ class UserDatabaseHelper {
         '''
      );
   }
+  //Tao tai khoan
   Future<int> regesterUser(User user) async{
      final db = await instance.database;
      return await db.insert('users', user.toMap() ,conflictAlgorithm:  ConflictAlgorithm.replace);
   }
+  //Đnhap bang sdt va pass
   Future<User?> loginUser(String phone, String password) async {
     final db = await database;
     final result = await db.query(
@@ -48,13 +50,21 @@ class UserDatabaseHelper {
       whereArgs: [phone, password],
     );
 
-    print("Kết quả login: $result");
-
     if (result.isNotEmpty) {
       return User.fromMap(result.first);
     }
     return null;
   }
+  //Lấy thông tin cá nhân từ đky
+  Future<User?> getUser(String phone) async{
+     final db = await instance.database;
+     final result = await db.query('users' , where: 'phone = ?' ,whereArgs: [phone],
+     );
+     if(result.isNotEmpty){
+       return User.fromMap(result.first);
+     }return null;
+  }
+
 }
 
 
