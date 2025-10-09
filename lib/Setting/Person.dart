@@ -53,11 +53,12 @@ class _PersonState extends State<Person> {
   }
   Future<void> _saveProfile() async{
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('name', _nameController.text);
-    await prefs.setString('email', _emailController.text);
-    await prefs.setString('phone', _phoneController.text);
-    await prefs.setString('introduce', _introduceController.text);
-    await prefs.setString('city', selectedCity);
+    final keyPrefix = widget.phone;
+    await prefs.setString('${keyPrefix}_name', _nameController.text);
+    await prefs.setString('${keyPrefix}_email', _emailController.text);
+    await prefs.setString('${keyPrefix}_phone', _phoneController.text);
+    await prefs.setString('${keyPrefix}_introduce', _introduceController.text);
+    await prefs.setString('${keyPrefix}_city', selectedCity);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Lưu thông tin thành công'),
       backgroundColor: Colors.green,

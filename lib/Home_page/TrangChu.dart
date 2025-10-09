@@ -10,6 +10,7 @@ import 'package:app_01/Pay/Thanhtoan.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../product/product.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Shop2 extends StatefulWidget {
   const Shop2({super.key});
 
@@ -18,6 +19,20 @@ class Shop2 extends StatefulWidget {
 }
 
 class _Shop2State extends State<Shop2> {
+  String? _username;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserInfo();
+  }
+
+  Future<void> _loadUserInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _username = prefs.getString('username') ?? 'Người dùng';
+    });
+  }
   List<Product2> cart = [];
   int _selecIndex = 1;
   List<Product2> productfood = [
@@ -123,10 +138,10 @@ class _Shop2State extends State<Shop2> {
           backgroundColor: Colors.black,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
-              Icon(Icons.local_restaurant, color: Colors.white),
+            children:  [
+            //  Icon(Icons.local_restaurant, color: Colors.white),
               SizedBox(width: 8),
-              Text("Trang Chủ", style: TextStyle(color: Colors.white)),
+              Text('Hi, ${_username ?? ''}',style: TextStyle(color: Colors.white),)
             ],
           ),
           bottom: const TabBar(

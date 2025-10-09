@@ -1,3 +1,4 @@
+import 'package:app_01/Provider/SetBrightNess.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Provider/CardProvider.dart';
@@ -14,6 +15,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
         ChangeNotifierProvider(create: (_) => HistoryProvider()),
+        ChangeNotifierProvider(create: (_) => SetBrightNess()),
       ],
       child: const MyApp(),
     ),
@@ -37,6 +39,9 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.black,
           elevation: 0,
         ),
+          textTheme: Theme.of(context).textTheme.copyWith(
+            labelSmall: TextStyle(fontSize: 20, color: Colors.red),
+          ),
       ),
       routes: {
         '/login': (context) => const Dangnhap(),

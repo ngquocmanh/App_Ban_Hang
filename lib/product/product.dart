@@ -1,6 +1,6 @@
 class Product3 {
   final String ten;
-  final List<String> anhs; // nhiều ảnh
+  final List<String> anhs;
   final double gia;
   final String mota;
   int quantity;

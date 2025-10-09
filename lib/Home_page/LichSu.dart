@@ -12,8 +12,6 @@ class Lichsu extends StatefulWidget {
   @override
   State<Lichsu> createState() => _LichsuState();
 }
-
-
 class _LichsuState extends State<Lichsu> {
   int _selectedIndex = 3;
   @override @override

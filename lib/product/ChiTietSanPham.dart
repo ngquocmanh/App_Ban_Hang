@@ -21,8 +21,7 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
   @override
   Widget build(BuildContext context) {
     final reviewProvider = Provider.of<ReviewProvider>(context);
-    final productReviews =
-    reviewProvider.getReviewsForProduct(widget.product.name1);
+    final productReviews = reviewProvider.getReviewsForProduct(widget.product.name1);
 
     return Scaffold(
       backgroundColor: Colors.black,

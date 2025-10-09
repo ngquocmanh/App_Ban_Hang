@@ -19,7 +19,11 @@ class _DangkyState extends State<Dangky> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-
+  final List<String> _images = [
+    'https://images.pexels.com/photos/4744789/pexels-photo-4744789.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/5210192/pexels-photo-5210192.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=600',
+  ];
   bool _isAgreey = false;
 
   Future<void> _register() async {

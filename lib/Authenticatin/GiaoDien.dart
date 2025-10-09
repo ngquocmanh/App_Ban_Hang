@@ -1,7 +1,7 @@
 import 'package:app_01/Authenticatin/DangKy.dart';
-import 'package:app_01/Authenticatin/DangNhap.dart';
+// import 'package:app_01/Authenticatin/DangNhap.dart';
 import 'package:flutter/material.dart';
-import 'package:app_01/Home_page/TrangChu.dart';
+// import 'package:app_01/Home_page/TrangChu.dart';
 class Giaodien extends StatefulWidget {
   const Giaodien({super.key});
 
@@ -52,18 +52,18 @@ class _GiaodienState extends State<Giaodien> {
                  ElevatedButton(onPressed: (){
                    Navigator.pushNamed(context, '/login');
                  },
-                     child: Text('Đăng nhập',style: TextStyle(color: Colors.white),),
                    style: ElevatedButton.styleFrom(
                      backgroundColor: Colors.red,
                      foregroundColor: Colors.black
                    ),
+                     child: Text('Đăng nhập',style: TextStyle(color: Colors.white),),
                  ),
                  SizedBox(width: 40,),
                  ElevatedButton(onPressed: (){
                    Navigator.push(context, MaterialPageRoute(builder: (context) => Dangky()));
                  },
-                   child: Text('Đăng ký',style: TextStyle(color: Colors.white),),
                    style: ElevatedButton.styleFrom( backgroundColor: Color(0xFFBDBDBD)),
+                   child: Text('Đăng ký',style: TextStyle(color: Colors.white),),
                  ),
                 ],
               )
