@@ -24,9 +24,9 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
     final productReviews = reviewProvider.getReviewsForProduct(widget.product.name1);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.black12,
       appBar: AppBar(
-        title: Text(widget.product.name1,style: TextStyle(color: Colors.white60),),
+        title: Text(widget.product.name1,style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -68,8 +68,13 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
                   color: Colors.blue[900],
                 ),
               ),
+            //  const SizedBox(height: 5),
+              Text(
+                widget.product.mota,
+                style: TextStyle(
+                    fontSize:20, color: Colors.yellow, height: 1.5),
+              ),
               const SizedBox(height: 10),
-
               Text(
                 'Giá: ${widget.product.price.toInt()} VNĐ',
                 style: TextStyle(
@@ -79,12 +84,6 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                'Mô tả sản phẩm: ...',
-                style: TextStyle(
-                    fontSize:20, color: Colors.white, height: 1.5),
-              ),
-              const SizedBox(height: 30),
               Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(

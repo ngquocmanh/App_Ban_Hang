@@ -12,6 +12,7 @@ class HistoryProvider with ChangeNotifier {
       price: p.price,
       image1: p.image1,
       quantity: p.quantity,
+      mota:p.mota,
     )));
     notifyListeners();
   }
