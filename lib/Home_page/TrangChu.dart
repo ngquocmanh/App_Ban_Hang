@@ -1,3 +1,4 @@
+import 'package:app_01/Home_page/Search.dart';
 import 'package:app_01/Provider/CardProvider.dart';
 import 'package:app_01/product/ChiTietSanPham.dart';
 import 'package:app_01/Home_page/DatBan.dart';
@@ -137,8 +138,16 @@ class _Shop2State extends State<Shop2> {
       mota: 'Nước ép xoài sánh mịn, hương thơm quyến rũ, vị ngọt tự nhiên hấp dẫn.',
     ),
   ];
-  bool _isSearching = false;
-  String _searchQuery = "";
+  // bool _isSearching = false;
+  // String _searchQuery = "";
+  // List<Product2> _filterProducts(List<Product2> products) {
+  //   if (_searchQuery.isEmpty) {
+  //     return products;
+  //   }
+  //   return products
+  //       .where((product) => product.name1.toLowerCase().contains(_searchQuery.toLowerCase()))
+  //       .toList();
+  // }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -154,8 +163,11 @@ class _Shop2State extends State<Shop2> {
             children:  [
              // Icon(Icons.search_rounded, color: Colors.white),
              //  SizedBox(width: 8),
-              Text('Hi, ${_username ?? ''}',style: TextStyle(color: Colors.white),),
-              IconButton(onPressed: (){}, icon: Icon(Icons.search_rounded,color: Colors.white,)),
+              Text('Hi, ${_username ?? ''}',style: TextStyle(color: Colors.red),),
+              IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>Search()));
+              }, icon: Icon(Icons.search_rounded,color: Colors.white,)),
+
             ],
           ),
           bottom:  TabBar(
@@ -175,7 +187,6 @@ class _Shop2State extends State<Shop2> {
           children: [
             buildProductList(productfood),
             buildProductList(productdink),
-            //  buildProductCard2(productcombo),
           ],
         ),
         floatingActionButton: Consumer<CartProvider>(
