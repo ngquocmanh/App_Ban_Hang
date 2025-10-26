@@ -28,7 +28,7 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
       appBar: AppBar(
         title: Text(widget.product.name1,style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
+         automaticallyImplyLeading: false,
         elevation: 0,
       ),
       body: SingleChildScrollView(
