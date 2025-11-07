@@ -3,7 +3,7 @@ import 'package:app_01/Provider/CardProvider.dart';
 import 'package:app_01/product/ChiTietSanPham.dart';
 import 'package:app_01/Home_page/DatBan.dart';
 import 'package:app_01/Home_page/LichSu.dart';
-import 'package:app_01/Location.dart';
+import 'package:app_01/%20Other_functions/Location.dart';
 import 'package:app_01/Home_page/Setting.dart';
 import 'package:flutter/material.dart';
 import 'package:app_01/product/Sanpham.dart';

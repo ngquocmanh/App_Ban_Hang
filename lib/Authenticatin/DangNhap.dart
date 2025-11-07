@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 class Dangnhap extends StatefulWidget {
   const Dangnhap({super.key});
 
@@ -252,8 +253,10 @@ class _DangnhapState extends State<Dangnhap> {
                     ),
 
                     ElevatedButton(
-                      onPressed:
-                        _loginUser,
+                      onPressed:(){
+                        _loginUser();
+                        Get.snackbar('Cửa hàng ABC', "Xin chào quý khach",backgroundColor: Colors.white , colorText: Colors.orangeAccent);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                         padding: const EdgeInsets.symmetric(vertical: 14),

@@ -1,8 +1,11 @@
 import 'package:app_01/Authenticatin/GiaoDien.dart';
+import 'package:app_01/Provider/SetBrightNess.dart';
 import 'package:app_01/Setting/Trogiup.dart';
 import 'package:app_01/Home_page/DatBan.dart';
 import 'package:app_01/Setting/Person.dart';
 import 'package:flutter/material.dart';
+import 'package:app_01/Setting/BrightNess.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'TrangChu.dart';
 import 'LichSu.dart';
 
@@ -82,7 +85,7 @@ class _SettingState extends State<Setting> {
                       style: TextStyle(color: Colors.white)),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Person(phone: '',)));
+                        MaterialPageRoute(builder: (context) => const Person()));
                   },
                 ),
                 ListTile(
@@ -169,8 +172,10 @@ class _SettingState extends State<Setting> {
                   secondary: const Icon(Icons.dark_mode, color: Colors.white),
                   title: const Text("Chế độ tối",
                       style: TextStyle(color: Colors.white)),
-                  value: true,
-                  onChanged: (val) {},
+                  value: context.watch<SetBrightNess>().isDark,
+                  onChanged: (val) {
+                    context.read<SetBrightNess>().setBrightness(val);
+                  },
                 ),
                 ListTile(
                   leading: const Icon(Icons.language, color: Colors.white),

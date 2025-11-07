@@ -1,3 +1,4 @@
+import 'package:app_01/%20Other_functions/LichSuDatBan.dart';
 import 'package:app_01/Home_page/LichSu.dart';
 
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class _PromoPageState extends State<PromoPage> {
         ),
         actions: [
           IconButton(onPressed: (){
-          //  Navigator.push(context, MaterialPageRoute(builder: (context) => LichSuDatBan()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>LichSuDatBan()));
           },
               icon: Icon(Icons.history_outlined,color: Colors.white,))
         ],

@@ -98,6 +98,7 @@ class _DangkyState extends State<Dangky> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Vui lòng nhập họ tên';
+
                     }
                     return null;
                   },
