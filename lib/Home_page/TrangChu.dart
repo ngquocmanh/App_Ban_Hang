@@ -281,7 +281,7 @@ class _Shop2State extends State<Shop2> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Lichsu()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryPage()));
                     setState(() {
                       _selecIndex = 3;
                     });

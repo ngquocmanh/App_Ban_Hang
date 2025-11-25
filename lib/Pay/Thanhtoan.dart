@@ -111,7 +111,7 @@ class Pay2 extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                                 side: BorderSide(color: Colors.white,width: 1.5),
                               ),
-                              title: Text('Xác nhận thanh toánn ${NumberFormat.decimalPattern('vi').format(total)} VND',style: TextStyle(color: Colors.white),),
+                              title: Text('Xác nhận thanh toán ${NumberFormat.decimalPattern('vi').format(total)} VND',style: TextStyle(color: Colors.white),),
                               actions: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

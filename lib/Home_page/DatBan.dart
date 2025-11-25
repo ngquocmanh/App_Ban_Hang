@@ -361,7 +361,7 @@ class _PromoPageState extends State<PromoPage> {
                                   'Số điện thoại: ${_phoneController.text}\n'
                                   'Bàn: ${_tableController.text}\n'
                                   'Ngày: ${_dateController.text} - Giờ: ${_timeController.text}',
-                            ),
+                            ),duration: Duration(seconds: 3),
                           ),
                         );
                         _nameController.clear();
@@ -413,7 +413,7 @@ class _PromoPageState extends State<PromoPage> {
                 setState(() => _selectedIndex = 3);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const Lichsu()),
+                  MaterialPageRoute(builder: (context) => const HistoryPage()),
                 );
               }),
               buildBottomNavItem(Icons.settings, "Cài đặt", 4, () {

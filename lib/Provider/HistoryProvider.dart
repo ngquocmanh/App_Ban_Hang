@@ -1,27 +1,42 @@
 import 'package:flutter/material.dart';
-import '../product/Sanpham.dart';
+import 'package:app_01/db/historydb.dart';
+import 'package:app_01/db/history.dart';
 
 class HistoryProvider with ChangeNotifier {
-  final List<Product2> _history = [];
+  List<HistoryItem> _historyList = [];
 
-  List<Product2> get history => _history;
-
-  void addToHistory(List<Product2> products) {
-    _history.addAll(products.map((p) => Product2(
-      name1: p.name1,
-      price: p.price,
-      image1: p.image1,
-      quantity: p.quantity,
-      mota:p.mota,
-    )));
+  List<HistoryItem> get historyList => _historyList;
+  Future<void> loadHistory() async {
+    final db = await DBHelper.instance.db;
+    final data = await db.query("history", orderBy: "id DESC");
+    _historyList = data.map((e) => HistoryItem.fromMap(e)).toList();
     notifyListeners();
   }
 
-  void clearHistory() {
-    _history.clear();
-    notifyListeners();
+  Future<void> addToHistory(List cartItems) async {
+    final db = await DBHelper.instance.db;
+
+    for (var item in cartItems) {
+      final history = HistoryItem(
+        name: item.name1,
+        quantity: item.quantity,
+        price: item.price * item.quantity,
+        image: item.image1,
+      );
+
+      await db.insert("history", history.toMap());
+    }
+
+    await loadHistory();
   }
-
-
+  Future<void> deleteHistory(int id) async {
+    final db = await DBHelper.instance.db;
+    await db.delete("history", where: "id = ?", whereArgs: [id]);
+    await loadHistory();
+  }
+  Future<void> clearHistory() async {
+    final db = await DBHelper.instance.db;
+    await db.delete("history");
+    await loadHistory();
+  }
 }
-

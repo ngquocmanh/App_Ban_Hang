@@ -288,7 +288,7 @@ class _SettingState extends State<Setting> {
               buildBottomNavItem(Icons.history, "Lịch sử", 3, () {
                 setState(() => _selectedIndex = 3);
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => const Lichsu()));
+                    context, MaterialPageRoute(builder: (context) => const HistoryPage()));
               }),
               buildBottomNavItem(Icons.settings, "Cài đặt", 4, () {
                 setState(() => _selectedIndex = 4);
