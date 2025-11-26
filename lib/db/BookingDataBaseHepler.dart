@@ -35,7 +35,6 @@ class BookingDataBaseHelper {
     return await db.insert('booking', booking);
   }
 
-  // Đọc tất cả các booking
   Future<List<Map<String, dynamic>>> getAllBookings() async {
     final db = await instance.database;
     return await db.query('booking');

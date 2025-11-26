@@ -76,24 +76,41 @@ class _DangnhapState extends State<Dangnhap> {
   //     }
   //   }
   // }
-  Future<void>_loginUser() async{
-    if(_formKey.currentState!.validate()){
+  Future<void> _loginUser() async {
+    if (_formKey.currentState!.validate()) {
       final user = await UserDatabaseHelper.instance.loginUser(
-          _phoneController.text.trim(),
+        _phoneController.text.trim(),
         _passController.text.trim(),
       );
-      if(user!=null){
+
+      if (user != null) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('username', user.name);
         await prefs.setString('phone', user.phone);
-        Navigator.pushReplacementNamed(context, '/shop');
-      }else{
+        await prefs.setString('role', user.role);
+
+        if (user.role == 'admin') {
+          Navigator.pushReplacementNamed(context, '/admin');
+        } else {
+          Navigator.pushReplacementNamed(context, '/shop');
+        }
+
+        Get.snackbar(
+          'Chào mừng',
+          'Xin chào ${user.name}',
+          backgroundColor: Colors.white,
+          colorText: Colors.orangeAccent,
+        );
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Sai toan khoan mat khau'))
+          const SnackBar(
+            content: Text('Sai số điện thoại hoặc mật khẩu', style: TextStyle(color: Colors.red)),
+          ),
         );
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

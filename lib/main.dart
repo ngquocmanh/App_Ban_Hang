@@ -1,3 +1,4 @@
+import 'package:app_01/Admin.dart';
 import 'package:app_01/Provider/SearchProvider.dart';
 import 'package:app_01/Provider/SetBrightNess.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,9 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/login': (context) => const Dangnhap(),
-        '/shop': (context) => const Shop2(),
+        // '/shop': (context) => const Shop2(),
+        '/shop': (context) => Shop2(),
+        '/admin': (context) => AdminDashboard(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/pay') {

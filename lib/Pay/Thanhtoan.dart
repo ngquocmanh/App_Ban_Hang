@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../Provider/CardProvider.dart';
 import 'package:intl/intl.dart';
 import '../Provider/HistoryProvider.dart';
+
 class Pay2 extends StatelessWidget {
   const Pay2({super.key});
 
@@ -16,11 +17,59 @@ class Pay2 extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text('Thanh toán sản phẩm',style: TextStyle(color: Colors.white),),
+        title: const Text(
+          'Thanh toán sản phẩm',
+          style: TextStyle(color: Colors.white),
+        ),
         automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white60, width: 1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(7),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Địa chỉ",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Icon(Icons.location_on, color: Colors.white),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: 'Nhập địa chỉ của bạn',
+                          hintStyle: TextStyle(color: Colors.white54),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          suffixIcon: Icon(Icons.edit,color: Colors.white,),
+                          filled: true,
+                          fillColor: Colors.white12,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: cartItems.length,
@@ -28,10 +77,11 @@ class Pay2 extends StatelessWidget {
                 final item = cartItems[index];
                 return Card(
                   color: Colors.black,
-                  margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  margin:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
-                    side: BorderSide(color: Colors.white,width: 1.5),
+                    side: const BorderSide(color: Colors.white60, width: 1),
                   ),
                   elevation: 5,
                   child: Padding(
@@ -67,17 +117,20 @@ class Pay2 extends StatelessWidget {
                                   color: Colors.orange,
                                   fontWeight: FontWeight.w500,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
-                            cartProvider.removeFromCart(item);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Đã xóa ${item.name1}')),
-                            );
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              cartProvider.removeFromCart(item);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text('Đã xóa ${item.name1}')),
+                              );
+                            });
                           },
                         ),
                       ],
@@ -106,44 +159,56 @@ class Pay2 extends StatelessWidget {
                           builder: (context) {
                             return AlertDialog(
                               backgroundColor: Colors.black,
-
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
-                                side: BorderSide(color: Colors.white,width: 1.5),
+                                side: const BorderSide(
+                                    color: Colors.white, width: 1.5),
                               ),
-                              title: Text('Xác nhận thanh toán ${NumberFormat.decimalPattern('vi').format(total)} VND',style: TextStyle(color: Colors.white),),
+                              title: Text(
+                                'Xác nhận thanh toán ${NumberFormat.decimalPattern('vi').format(total)} VND',
+                                style: const TextStyle(color: Colors.white),
+                              ),
                               actions: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
                                   children: [
                                     TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text('Thanh toán thành công $total VND')),
-                                          );
-                                          final historyProvider = Provider.of<HistoryProvider>(context, listen: false);
-                                          historyProvider.addToHistory(List.from(cartProvider.cart));
-                                          cartProvider.clearCart();
-                                        },
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                              content: Text(
+                                                  'Thanh toán thành công $total VND')),
+                                        );
+                                        final historyProvider =
+                                        Provider.of<HistoryProvider>(
+                                            context,
+                                            listen: false);
+                                        historyProvider.addToHistory(
+                                            List.from(cartProvider.cart));
+                                        cartProvider.clearCart();
+                                      },
                                       child: const Text('Đồng ý'),
                                       style: TextButton.styleFrom(
                                         backgroundColor: Colors.green,
                                         foregroundColor: Colors.black,
-                                        padding: EdgeInsets.symmetric(horizontal: 30 ,vertical: 10),
-                                        minimumSize: Size(30, 30),
-                                      )
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 30, vertical: 10),
+                                      ),
                                     ),
                                     TextButton.icon(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
                                       label: const Text('Hủy'),
+                                      icon: const Icon(Icons.cancel),
                                       style: TextButton.styleFrom(
                                         backgroundColor: Colors.red,
                                         foregroundColor: Colors.black,
-                                        padding: EdgeInsets.symmetric(vertical: 10 ,horizontal: 30),
-                                        minimumSize: Size(30, 30),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 30),
                                       ),
                                     ),
                                   ],
@@ -154,16 +219,17 @@ class Pay2 extends StatelessWidget {
                         );
                       },
                       label: const Text('Thanh toán'),
+                      icon: const Icon(Icons.payment),
                       style: ElevatedButton.styleFrom(
                         iconColor: Colors.black,
                         backgroundColor: Colors.green,
                         foregroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15),
                       ),
-                      icon: Icon(Icons.payment),
                     ),
                     const SizedBox(width: 30),
                     ElevatedButton.icon(
@@ -171,21 +237,22 @@ class Pay2 extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       label: const Text('Quay lại'),
+                      icon: const Icon(Icons.arrow_back),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                         foregroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15),
                       ),
-                      icon: Icon(Icons.arrow_back),
                     ),
                   ],
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

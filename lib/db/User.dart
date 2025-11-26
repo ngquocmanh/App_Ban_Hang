@@ -4,7 +4,8 @@ class User{
   String email;
   String phone;
   String password;
-  User({this.id , required this.name , required this.email , required this.phone , required this.password});
+  String role;
+  User({this.id , required this.name , required this.email , required this.phone , required this.password, required this.role});
 
   // Chuyển user thành map
   Map<String , dynamic> toMap(){
@@ -14,6 +15,7 @@ class User{
       'email': email,
       'phone' : phone,
       'password':password,
+      'role':role,
     };
   }
   // Tạo user từ map
@@ -24,6 +26,7 @@ class User{
         email: map['email'],
         phone: map['phone'],
         password: map['password'],
+        role: map["role"],
     );
   }
 }

@@ -19,6 +19,7 @@ class _DangkyState extends State<Dangky> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
   final List<String> _images = [
     'https://images.pexels.com/photos/4744789/pexels-photo-4744789.jpeg?auto=compress&cs=tinysrgb&w=600',
     'https://images.pexels.com/photos/5210192/pexels-photo-5210192.jpeg?auto=compress&cs=tinysrgb&w=600',
@@ -32,10 +33,11 @@ class _DangkyState extends State<Dangky> {
           name: _nameController.text,
           email:_emailController.text,
           phone: _phoneController.text,
-          password: _passController.text
+          password: _passController.text,
+          role:'user'
       );
 
-      await UserDatabaseHelper.instance.regesterUser(user);
+      await UserDatabaseHelper.instance.registerUser(user);
 
       if (!mounted) return;
 
