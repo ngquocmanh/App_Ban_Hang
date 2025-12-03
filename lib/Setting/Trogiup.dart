@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 class TroGiup extends StatelessWidget {
   const TroGiup({super.key});
 
-  // Hàm mở link, truyền context để hiện SnackBar nếu lỗi
   Future<void> _openLink(BuildContext context, String url) async {
     final Uri uri = Uri.parse(url);
     try {

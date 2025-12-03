@@ -1,27 +1,28 @@
-import 'package:app_01/%20Other_functions/LichSuDatBan.dart';
-import 'package:app_01/Home_page/LichSu.dart';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'Setting.dart';
-import 'TrangChu.dart';
+import '../ Other_functions/LichSuDatBan.dart';
 import '../db/BookingDataBaseHepler.dart';
 import '../db/book_table.dart';
-
+import 'Setting.dart';
+import 'TrangChu.dart';
+import '../Home_page/LichSuMuaHang.dart';
 class Product {
   final List<String> anhs;
   Product({required this.anhs});
 }
 
-class PromoPage extends StatefulWidget {
-  const PromoPage({super.key});
+class DatBan extends StatefulWidget {
+  final int userId;
+
+  const DatBan({super.key, required this.userId});
 
   @override
-  State<PromoPage> createState() => _PromoPageState();
+  State<DatBan> createState() => _DatBanState();
 }
 
-class _PromoPageState extends State<PromoPage> {
+class _DatBanState extends State<DatBan> {
   final List<Product> combos = [
     Product(anhs: [
       "https://images.pexels.com/photos/3297807/pexels-photo-3297807.jpeg?auto=compress&cs=tinysrgb&w=300&h=300",
@@ -53,19 +54,6 @@ class _PromoPageState extends State<PromoPage> {
     }
   }
 
-  // @override
-  // void dispose() {
-  //   for (final controller in _controllers.values) {
-  //     controller.dispose();
-  //   }
-  //   _tableController.dispose();
-  //   _nameController.dispose();
-  //   _phoneController.dispose();
-  //   _dateController.dispose();
-  //   _timeController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,10 +66,17 @@ class _PromoPageState extends State<PromoPage> {
           style: TextStyle(color: Colors.white),
         ),
         actions: [
-          IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>LichSuDatBan()));
-          },
-              icon: Icon(Icons.history_outlined,color: Colors.white,))
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LichSuDatBan(userId: widget.userId),
+                ),
+              );
+            },
+            icon: Icon(Icons.history_outlined, color: Colors.white),
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -345,14 +340,22 @@ class _PromoPageState extends State<PromoPage> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        print('DEBUG: Đặt bàn bởi userId=${widget.userId}');
+                        print('Tên: ${_nameController.text}');
+                        print('SĐT: ${_phoneController.text}');
+                        print('Bàn: ${_tableController.text}');
+                        print('Ngày: ${_dateController.text}');
+                        print('Giờ: ${_timeController.text}');
                         final booking = Booking(
+                          userId: widget.userId,
                           name: _nameController.text,
                           phone: _phoneController.text,
                           soBan: _tableController.text,
                           bookingdate: _dateController.text,
                           bookingtime: _timeController.text,
                         );
-                        await BookingDataBaseHelper.instance.insertBooking(booking.toMap());
+                        await BookingDataBaseHelper.instance
+                            .insertBooking(booking.toMap());
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -361,9 +364,11 @@ class _PromoPageState extends State<PromoPage> {
                                   'Số điện thoại: ${_phoneController.text}\n'
                                   'Bàn: ${_tableController.text}\n'
                                   'Ngày: ${_dateController.text} - Giờ: ${_timeController.text}',
-                            ),duration: Duration(seconds: 3),
+                            ),
+                            duration: Duration(seconds: 3),
                           ),
                         );
+
                         _nameController.clear();
                         _phoneController.clear();
                         _tableController.clear();
@@ -371,7 +376,6 @@ class _PromoPageState extends State<PromoPage> {
                         _timeController.clear();
                       }
                     },
-
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 50),
                       backgroundColor: Colors.orange,
@@ -403,7 +407,7 @@ class _PromoPageState extends State<PromoPage> {
                 setState(() => _selectedIndex = 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const Shop2()),
+                  MaterialPageRoute(builder: (context) => TrangChu(userId: widget.userId)),
                 );
               }),
               buildBottomNavItem(Icons.calendar_month_outlined, "Đặt bàn", 2, () {
@@ -413,14 +417,16 @@ class _PromoPageState extends State<PromoPage> {
                 setState(() => _selectedIndex = 3);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HistoryPage()),
+                  MaterialPageRoute(
+                    builder: (context) => LichSuMuaHang(userId: widget.userId),
+                  ),
                 );
               }),
               buildBottomNavItem(Icons.settings, "Cài đặt", 4, () {
                 setState(() => _selectedIndex = 4);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const Setting()),
+                  MaterialPageRoute(builder: (context) => Setting(userId: widget.userId)),
                 );
               }),
             ],
@@ -438,7 +444,7 @@ class _PromoPageState extends State<PromoPage> {
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(60, 60),
         backgroundColor: Colors.black,
-        padding: EdgeInsets.zero
+        padding: EdgeInsets.zero,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

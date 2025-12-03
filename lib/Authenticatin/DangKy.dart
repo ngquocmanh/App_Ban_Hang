@@ -63,8 +63,6 @@ class _DangkyState extends State<Dangky> {
       );
     }
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

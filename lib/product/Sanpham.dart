@@ -1,33 +1,42 @@
-import 'dart:ffi';
-
 class Product2 {
-   int? id;
-  final String name1;
-  final String image1;
-  final double price;
-  final String mota;
+  int? id;
+  String name1;
+  String image1;
+  double price;
+  String mota;
   int quantity;
-  Product2({ this.id,required this.name1 , required this.image1 , required this.price, this.quantity = 1 , required this.mota});
-  //Chuyển tối tượng user thành map
-  Map<String ,dynamic> toMap(){
+  String type;
+  Product2({
+    this.id,
+    required this.name1,
+    required this.image1,
+    required this.price,
+    required this.mota,
+    this.quantity = 1,
+    this.type = 'food',
+  });
+
+  Map<String, dynamic> toMap() {
     return {
-      'id':id,
-      'name' : name1,
-      'image' : image1,
-      'price' : price,
+      'id': id,
+      'name': name1,
+      'image': image1,
+      'price': price,
+      'mota': mota,
       'quantity': quantity,
-      'mota':mota,
+      'type': type,
     };
   }
-  //Tạo user từ map
-  factory Product2.fromMap(Map<String , dynamic> map){
+
+  factory Product2.fromMap(Map<String, dynamic> map) {
     return Product2(
-        id:map['id'],
-        name1: map['name'],
-        image1: map['image'],
-        price: map['price'],
-        quantity: map['quantity'],
-        mota: map['mota']
+      id: map['id'],
+      name1: map['name'],
+      image1: map['image'],
+      price: map['price'],
+      mota: map['mota'],
+      quantity: map['quantity'],
+      type: map['type'] ?? 'food',
     );
   }
 }

@@ -92,8 +92,8 @@ class Pay2 extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
                             item.image1,
-                            width: 50,
-                            height: 50,
+                            width:10,
+                            height: 10,
                             fit: BoxFit.cover,
                           ),
                         ),

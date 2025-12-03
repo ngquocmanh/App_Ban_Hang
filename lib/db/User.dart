@@ -1,32 +1,40 @@
-class User{
-  int? id;
-  String name;
-  String email;
-  String phone;
-  String password;
-  String role;
-  User({this.id , required this.name , required this.email , required this.phone , required this.password, required this.role});
 
-  // Chuyển user thành map
-  Map<String , dynamic> toMap(){
-    return {
-      'id' : id,
-      'name' : name,
-      'email': email,
-      'phone' : phone,
-      'password':password,
-      'role':role,
-    };
-  }
-  // Tạo user từ map
-  factory User.fromMap(Map<String , dynamic> map){
+class User {
+  final int? userID;
+  final String name;
+  final String email;
+  final String phone;
+  final String password;
+  final String role;
+
+  User({
+    this.userID,
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.password,
+    required this.role,
+  });
+
+  factory User.fromMap(Map<String, dynamic> map) {
     return User(
-        id:map['id'],
-        name: map['name'],
-        email: map['email'],
-        phone: map['phone'],
-        password: map['password'],
-        role: map["role"],
+      userID: map['userID'] as int?,
+      name: map['name'] as String,
+      email: map['email'] as String,
+      phone: map['phone'] as String,
+      password: map['password'] as String,
+      role: map['role'] as String,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'userID': userID,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'password': password,
+      'role': role,
+    };
   }
 }

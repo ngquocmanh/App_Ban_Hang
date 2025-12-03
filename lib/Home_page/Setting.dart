@@ -7,10 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:app_01/Setting/BrightNess.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'TrangChu.dart';
-import 'LichSu.dart';
-
+import 'LichSuMuaHang.dart';
+import 'package:app_01/db/User.dart';
 class Setting extends StatefulWidget {
-  const Setting({super.key});
+  final int userId;
+  const Setting({super.key,required this.userId});
 
   @override
   State<Setting> createState() => _SettingState();
@@ -279,16 +280,16 @@ class _SettingState extends State<Setting> {
               buildBottomNavItem(Icons.home, "Trang chủ", 1, () {
                 setState(() => _selectedIndex = 1);
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => const Shop2()));
+                    context, MaterialPageRoute(builder: (context) =>TrangChu(userId: widget.userId)));
               }),
               buildBottomNavItem(Icons.calendar_month_outlined, "Đặt bàn", 2, () {
                 setState(() => _selectedIndex = 2);
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>PromoPage()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>DatBan(userId: widget.userId)));
               }),
               buildBottomNavItem(Icons.history, "Lịch sử", 3, () {
                 setState(() => _selectedIndex = 3);
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => const HistoryPage()));
+                    context, MaterialPageRoute(builder: (context) => LichSuMuaHang(userId: widget.userId)));
               }),
               buildBottomNavItem(Icons.settings, "Cài đặt", 4, () {
                 setState(() => _selectedIndex = 4);

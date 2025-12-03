@@ -257,7 +257,7 @@ class _SearchState extends State<Search> {
         return buildProductItemDemo(product, context);
       },
     );
-  } 
+  }
   Widget buildProductItemDemo(DemoMonAn product, BuildContext context) {
     return Card(
       margin: EdgeInsets.zero,

@@ -1,4 +1,5 @@
-import 'package:app_01/Admin.dart';
+import 'package:app_01/ADMIN/QlySanPham.dart';
+import 'package:app_01/ADMIN/HomePageAdmin.dart';
 import 'package:app_01/Provider/SearchProvider.dart';
 import 'package:app_01/Provider/SetBrightNess.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'Pay/Thanhtoan.dart';
 import 'Home_page/TrangChu.dart';
 import 'Provider/HistoryProvider.dart';
 import 'package:get/get.dart';
+import 'Provider/UserHepler.dart';
 void main() {
   runApp(
     MultiProvider(
@@ -36,7 +38,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         brightness: context.watch<SetBrightNess>().isDark
-        ? Brightness.dark : Brightness.light,
+            ? Brightness.dark
+            : Brightness.light,
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
@@ -44,15 +47,44 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.black,
           elevation: 0,
         ),
-          textTheme: Theme.of(context).textTheme.copyWith(
-            labelSmall: TextStyle(fontSize: 20, color: Colors.red),
-          ),
+        textTheme: Theme.of(context).textTheme.copyWith(
+          labelSmall: const TextStyle(fontSize: 20, color: Colors.red),
+        ),
       ),
+// Trong main.dart, sửa route '/shop'
       routes: {
         '/login': (context) => const Dangnhap(),
-        // '/shop': (context) => const Shop2(),
-        '/shop': (context) => Shop2(),
-        '/admin': (context) => AdminDashboard(),
+        '/shop': (context) => FutureBuilder<int?>(
+          future: UserHelper.getCurrentUserId(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Scaffold(
+                body: Center(child: CircularProgressIndicator()),
+              );
+            }
+
+            if (snapshot.hasError) {
+              print('Error loading userId: ${snapshot.error}');
+              return const Scaffold(
+                body: Center(child: Text('Lỗi tải thông tin người dùng')),
+              );
+            }
+
+            final userId = snapshot.data;
+            print('TrangChu với userId: $userId');
+
+            if (userId == null || userId <= 0) {
+
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.pushReplacementNamed(context, '/login');
+              });
+              return const Scaffold(body: Center(child: CircularProgressIndicator()));
+            }
+
+            return TrangChu(userId: userId);
+          },
+        ),
+        '/admin': (context) => AdminHomePage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/pay') {
@@ -66,3 +98,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
