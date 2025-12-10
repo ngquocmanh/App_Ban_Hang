@@ -40,4 +40,16 @@ class Booking {
       bookingtime: map['bookingtime'],
     );
   }
+  factory Booking.empty() {
+    return Booking(
+      id: -1,
+      userId: null,
+      name: "",
+      phone: "",
+      soBan: "",
+      bookingdate: "",
+      bookingtime: "",
+    );
+  }
+
 }

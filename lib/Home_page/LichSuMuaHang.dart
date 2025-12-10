@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_01/Home_page/DatBan.dart';
 import 'package:app_01/Home_page/Setting.dart';
 import 'package:app_01/Home_page/TrangChu.dart';
@@ -51,7 +53,12 @@ class _LichSuMuaHangState extends State<LichSuMuaHang> {
                     color: Colors.grey[900],
                     margin: const EdgeInsets.all(10),
                     child: ListTile(
-                      leading: Image.network(item.image, width: 40, height: 120),
+                      leading: ClipRRect(
+                    borderRadius:BorderRadius.circular(20),
+                  child:item.image.startsWith('http')
+                  ? Image.network(item.image, fit: BoxFit.cover)
+                      : Image.file(File(item.image), fit: BoxFit.cover),
+                  ),
                       title: Text(item.name, style: const TextStyle(color: Colors.white)),
                       subtitle: Text(
                         "${item.quantity} sản phẩm - "

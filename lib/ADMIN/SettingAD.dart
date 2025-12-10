@@ -8,9 +8,8 @@ class Settingad extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(onPressed: (){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>Giaodien() ));
-        },
-            child: Text('Đăng xuất')),
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>Giaodien()));
+        }, child: Text('Đăng xuất')),
       ),
     );
   }

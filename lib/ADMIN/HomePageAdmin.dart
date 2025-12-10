@@ -1,5 +1,5 @@
 import 'package:app_01/ADMIN/QlySanPham.dart';
-import 'package:app_01/ADMIN/SettingAD.dart';
+import 'package:app_01/ADMIN/SettingAd.dart';
 import 'package:app_01/ADMIN/TablePage.dart';
 import 'package:app_01/Home_page/Setting.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class AdminHomePage extends StatelessWidget {
     final menus = [
       ["Sản phẩm", Icons.shopping_bag,QlySanPham()],
       ["Đơn hàng", Icons.receipt_long,OrderPage()],
-//      ["Bàn", Icons.table_restaurant,TablePage()],
+      ["Bàn", Icons.table_restaurant,TablePage()],
       ["Người dùng", Icons.group,UserPage()],
       ["Thống kê", Icons.bar_chart,StatisticPage()],
       ["Cài Đặt", Icons.settings,Settingad()],
@@ -73,9 +73,9 @@ class AdminHomePage extends StatelessWidget {
               backgroundColor: Colors.blue.shade100,
               child: Icon(icon, color: Colors.blue),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            const Spacer(),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [

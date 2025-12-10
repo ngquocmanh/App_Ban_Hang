@@ -12,7 +12,7 @@ import 'package:app_01/product/ChiTietSanPham.dart';
 import 'package:app_01/db/productDB.dart';
 import 'package:app_01/product/Sanpham.dart';
 import 'package:app_01/Pay/Thanhtoan.dart';
-import 'package:app_01/db/User.dart';
+
 class TrangChu extends StatefulWidget {
   final int userId;
   const TrangChu({super.key,required this.userId});
@@ -68,7 +68,7 @@ class _TrangChuState extends State<TrangChu> {
               IconButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Search()));
+                      MaterialPageRoute(builder: (context) => ProductSearch()));
                 },
                 icon: Icon(Icons.search_rounded, color: Colors.white),
               ),
@@ -102,10 +102,10 @@ class _TrangChuState extends State<TrangChu> {
                       MaterialPageRoute(builder: (_) => Pay2()),
                     );
                   },
-                  child: const Icon(Icons.shopping_cart, color: Colors.red),
+                  child:  Icon(Icons.shopping_cart, color: Colors.red),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: const BorderSide(color: Colors.white, width: 1),
+                    side: BorderSide(color: Colors.white, width: 1),
                   ),
                 ),
                 if (cartProvider.cartCount > 0)

@@ -62,25 +62,20 @@ class MyApp extends StatelessWidget {
                 body: Center(child: CircularProgressIndicator()),
               );
             }
-
             if (snapshot.hasError) {
               print('Error loading userId: ${snapshot.error}');
               return const Scaffold(
                 body: Center(child: Text('Lỗi tải thông tin người dùng')),
               );
             }
-
             final userId = snapshot.data;
             print('TrangChu với userId: $userId');
-
             if (userId == null || userId <= 0) {
-
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacementNamed(context, '/login');
               });
               return const Scaffold(body: Center(child: CircularProgressIndicator()));
             }
-
             return TrangChu(userId: userId);
           },
         ),

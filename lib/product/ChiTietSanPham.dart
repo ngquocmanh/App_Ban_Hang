@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Sanpham.dart';
@@ -38,6 +40,7 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                height: 250,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
@@ -48,18 +51,12 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
                     ),
                   ],
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    widget.product.image1,
-                    width: double.infinity,
-                    height: 250,
-                    fit: BoxFit.cover,
-                  ),
+                child:ClipRRect(borderRadius: BorderRadius.circular(16),
+                  child: widget.product.image1.startsWith('http')
+                     ? Image.network(widget.product.image1, fit: BoxFit.cover) : Image.file(File(widget.product.image1), fit: BoxFit.cover),
                 ),
               ),
-              const SizedBox(height: 25),
-
+              SizedBox(height: 25),
               Text(
                 widget.product.name1,
                 style: TextStyle(
@@ -68,7 +65,7 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
                   color: Colors.blue[900],
                 ),
               ),
-            //  const SizedBox(height: 5),
+
               Text(
                 widget.product.mota,
                 style: TextStyle(

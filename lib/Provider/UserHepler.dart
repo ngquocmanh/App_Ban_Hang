@@ -1,4 +1,3 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
 class UserHelper {
   static Future<int?> getCurrentUserId() async {
@@ -11,7 +10,6 @@ class UserHelper {
         print('Cảnh báo: userId không hợp lệ hoặc null');
         return null;
       }
-
       return userId;
     } catch (e) {
       print('ERROR UserHelper.getCurrentUserId: $e');

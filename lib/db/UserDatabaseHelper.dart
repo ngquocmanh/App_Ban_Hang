@@ -1,20 +1,16 @@
-
 import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'User.dart';
-
 class UserDatabaseHelper {
   static final UserDatabaseHelper instance = UserDatabaseHelper._init();
   static Database? _database;
   UserDatabaseHelper._init();
-
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDB('user.db');
     return _database!;
   }
-
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
@@ -25,7 +21,6 @@ class UserDatabaseHelper {
       onUpgrade: _onUpgrade,
     );
   }
-
   Future _onCreateDB(Database db, int version) async {
     await db.execute('''
       CREATE TABLE users(
@@ -39,7 +34,6 @@ class UserDatabaseHelper {
     ''');
     await _insertDefaultAdmin(db);
   }
-
   Future _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 3) {
       await db.execute('''
@@ -61,7 +55,6 @@ class UserDatabaseHelper {
       await _insertDefaultAdmin(db);
     }
   }
-
   Future<void> _insertDefaultAdmin(Database db) async {
     final existingAdmin = await db.query('users', where: 'role = ?', whereArgs: ['admin']);
     if (existingAdmin.isEmpty) {
@@ -74,14 +67,12 @@ class UserDatabaseHelper {
       });
     }
   }
-
   Future<int> registerUser(User user) async {
     final db = await instance.database;
     final data = user.toMap();
     data['role'] = 'user';
     return await db.insert('users', data, conflictAlgorithm: ConflictAlgorithm.replace);
   }
-
   Future<User?> loginUser(String phone, String password) async {
     final db = await database;
     final result = await db.query(
@@ -94,7 +85,6 @@ class UserDatabaseHelper {
     }
     return null;
   }
-
   Future<User?> getUserByPhone(String phone) async {
     final db = await instance.database;
     final result = await db.query('users', where: 'phone = ?', whereArgs: [phone]);

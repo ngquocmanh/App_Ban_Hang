@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Provider/CardProvider.dart';
@@ -43,14 +45,14 @@ class Pay2 extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.location_on, color: Colors.white),
-                    const SizedBox(width: 8),
+                    Icon(Icons.location_on, color: Colors.white),
+                    SizedBox(width: 8),
                     Expanded(
                       child: TextField(
-                        style: const TextStyle(color: Colors.white),
+                        style:TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           hintText: 'Nhập địa chỉ của bạn',
                           hintStyle: TextStyle(color: Colors.white54),
@@ -88,31 +90,28 @@ class Pay2 extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            item.image1,
-                            width:10,
-                            height: 10,
-                            fit: BoxFit.cover,
-                          ),
+                         ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: item.image1.startsWith('http')
+                              ? Image.network(item.image1, fit: BoxFit.cover,width: 80 , height: 80,)
+                              : Image.file(File(item.image1), fit: BoxFit.cover,width: 80 ,height: 80,),
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "${item.name1} x${item.quantity}",
-                                style: const TextStyle(
+                                style:TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                               SizedBox(height: 8),
                               Text(
                                 "${NumberFormat.decimalPattern('vi').format(item.price * item.quantity)} VND",
-                                style: const TextStyle(
+                                style:TextStyle(
                                   fontSize: 16,
                                   color: Colors.orange,
                                   fontWeight: FontWeight.w500,
@@ -122,7 +121,7 @@ class Pay2 extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
+                          icon:  Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               cartProvider.removeFromCart(item);

@@ -1,16 +1,12 @@
 name: app_01
 description: "A new Flutter project."
 publish_to: 'none'
-
 version: 1.0.0+1
-
 environment:
   sdk: ^3.8.1
-
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.8
   flutter_bloc: ^9.1.1
   freezed_annotation: ^3.1.0
@@ -36,30 +32,27 @@ dependencies:
   get: ^4.7.2
   image_picker: ^1.2.0
   permission_handler: ^12.0.1
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-
   # code generation
   build_runner: ^2.4.8
   freezed: ^3.2.0
   injectable_generator: ^2.8.1
   flutter_launcher_icons: "^0.13.1"
-
 flutter:
   uses-material-design: true
-
   assets:
     - assets/images/shop.jpg
     - assets/images/icons8-container-truck-100.png
     - assets/images/person.jpg
     - assets/images/MapStore.png
+    - assets/images/Image1.png
+    - assets/images/Image2.png
+    - assets/images/Image3.jpg
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/images/icons8-container-truck-100.png"
-
   min_sdk_android: 21

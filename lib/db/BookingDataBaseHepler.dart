@@ -87,4 +87,12 @@ class BookingDataBaseHelper {
     final db = await instance.database;
     return await db.delete('bookings', where: 'id = ?', whereArgs: [id]);
   }
+  Future<List<Booking>> getAllBookings() async {
+    final db = await instance.database;
+
+    final maps = await db.query('bookings');
+
+    return maps.map((map) => Booking.fromMap(map)).toList();
+  }
+
 }
