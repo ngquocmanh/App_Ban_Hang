@@ -179,7 +179,7 @@ class Pay2 extends StatelessWidget {
                                             .showSnackBar(
                                           SnackBar(
                                               content: Text(
-                                                  'Thanh toán thành công $total VND')),
+                                                  'Thanh toán thành công ${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(total)} VND')),
                                         );
                                         final historyProvider =
                                         Provider.of<HistoryProvider>(

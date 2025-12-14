@@ -170,7 +170,6 @@ class _TrangChuState extends State<TrangChu> {
       ),
     );
   }
-
   Widget buildProductList(List<Product2> products) {
     return GridView.builder(
       padding: const EdgeInsets.fromLTRB(0, 180, 0, 0),
@@ -186,7 +185,6 @@ class _TrangChuState extends State<TrangChu> {
       },
     );
   }
-
   Widget buildProductCard(Product2 product) {
     return Card(
       color: Colors.black,

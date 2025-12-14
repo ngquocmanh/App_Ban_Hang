@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'package:app_01/Pay/Thanhtoan.dart';
 import 'package:flutter/material.dart';
 import 'package:app_01/db/productDB.dart';
 import 'package:app_01/product/Sanpham.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import '../Provider/CardProvider.dart';
 import '../product/ChiTietSanPham.dart';
 
 class ProductSearch extends StatefulWidget {
@@ -36,7 +40,6 @@ class _ProductSearchState extends State<ProductSearch> {
           .toList();
     });
   }
-
   @override
   void dispose() {
     searchCtrl.dispose();
@@ -174,13 +177,7 @@ class _ProductSearchState extends State<ProductSearch> {
                       final product = searchResults[index];
                       return InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  Chitietsanpham(product: product),
-                            ),
-                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Chitietsanpham(product: product)));
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -204,7 +201,7 @@ class _ProductSearchState extends State<ProductSearch> {
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             subtitle: Text(
-                              "Giá: ${product.price} VNĐ\nSố lượng: ${product.quantity}",
+                              "Giá: ${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(product.price)} VNĐ\nSố lượng: ${product.quantity}",
                               style: const TextStyle(
                                   fontSize: 14, color: Colors.black87),
                             ),
@@ -213,10 +210,52 @@ class _ProductSearchState extends State<ProductSearch> {
                           ),
                         ),
                       );
-               }
-               ),
-          ),
-        ],
+                    }
+                  ),
+                ),
+              ],
+             ),
+      floatingActionButton: Consumer<CartProvider>(
+        builder: (context, cartProvider, child) {
+          return Stack(
+            clipBehavior: Clip.none,
+            children: [
+              FloatingActionButton(
+                backgroundColor: Colors.black,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => Pay2()),
+                  );
+                },
+                child:  Icon(Icons.shopping_cart, color: Colors.red),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(color: Colors.white, width: 1),
+                ),
+              ),
+              if (cartProvider.cartCount > 0)
+                Positioned(
+                  right: -2,
+                  top: -2,
+                  child: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Text(
+                      '${cartProvider.cartCount}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          );
+        },
       ),
     );
   }

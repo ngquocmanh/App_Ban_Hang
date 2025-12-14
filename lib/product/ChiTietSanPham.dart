@@ -62,16 +62,26 @@ class _ChitietsanphamState extends State<Chitietsanpham> {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue[900],
+                  color: Colors.white,
                 ),
               ),
 
-              Text(
-                widget.product.mota,
-                style: TextStyle(
-                    fontSize:20, color: Colors.yellow, height: 1.5),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 20, height: 1.5),
+                  children: [
+                    TextSpan(
+                      text: 'Mô tả : ',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    TextSpan(
+                      text: widget.product.mota,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
               Text(
                 'Giá: ${widget.product.price.toInt()} VNĐ',
                 style: TextStyle(

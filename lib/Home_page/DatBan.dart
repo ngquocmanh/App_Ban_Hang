@@ -268,7 +268,7 @@ class _DatBanState extends State<DatBan> {
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(product.image1),
+                      backgroundImage: NetworkImage(product.image1)
                     ),
                     title: Text(
                       product.name1,
@@ -340,8 +340,6 @@ class _DatBanState extends State<DatBan> {
               },
             ),
           ),
-
-          // Giỏ hàng và nút đặt món
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -350,7 +348,6 @@ class _DatBanState extends State<DatBan> {
             ),
             child: Column(
               children: [
-                // Thông tin giỏ hàng
                 if (cartItems.isNotEmpty)
                   Column(
                     children: [
@@ -417,8 +414,6 @@ class _DatBanState extends State<DatBan> {
                       const SizedBox(height: 12),
                     ],
                   ),
-
-                // Nút đặt món
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
